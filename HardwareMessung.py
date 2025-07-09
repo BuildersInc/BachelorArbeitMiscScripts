@@ -65,9 +65,9 @@ print("--- Gefilterte Zeitdifferenzen ---")
 print(filtered_df)
 
 print("--- Statistiken (ohne Ausreißer) ---")
-print(f"Maximum Time Difference: {max_diff:.9f} s")
-print(f"Minimum Time Difference: {min_diff:.9f} s")
-print(f"Average Time Difference: {avg_diff:.9f} s")
+print(f"Maximum Time Difference: {max_diff:.9f} s ({max_diff * 1_000_000:.9f} µs)")
+print(f"Minimum Time Difference: {min_diff:.9f} s ({min_diff * 1_000_000:.9f} µs)")
+print(f"Average Time Difference: {avg_diff:.9f} s ({avg_diff * 1_000_000:.9f} µs)")
 
 
 plt.figure(figsize=(10, 5))
