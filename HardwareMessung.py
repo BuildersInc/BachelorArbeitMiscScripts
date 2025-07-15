@@ -57,9 +57,9 @@ filtered_df = result_df[
     (result_df["Time Difference [s]"] <= upper_bound)
 ]
 
-max_diff = filtered_df["Time Difference [s]"].max()
-min_diff = filtered_df["Time Difference [s]"].min()
-avg_diff = filtered_df["Time Difference [s]"].mean()
+max_diff = result_df["Time Difference [s]"].max()
+min_diff = result_df["Time Difference [s]"].min()
+avg_diff = result_df["Time Difference [s]"].mean()
 
 print("--- Gefilterte Zeitdifferenzen ---")
 print(filtered_df)
@@ -70,17 +70,29 @@ print(f"Minimum Time Difference: {min_diff:.9f} s ({min_diff * 1_000_000:.9f} µ
 print(f"Average Time Difference: {avg_diff:.9f} s ({avg_diff * 1_000_000:.9f} µs)")
 
 
+latex_string = f"& {min_diff * 1_000_000:.5f} µs & {max_diff * 1_000_000:.5f} µs & {avg_diff * 1_000_000:.5f} µs \\\\"
+latex_string = latex_string.replace(".", r"{,}")
+print(latex_string)
+
+center = 35
+half_range = 20  # in µs
+ymin = center - half_range
+ymax = center + half_range
+
 plt.figure(figsize=(10, 5))
 plt.scatter(
-    filtered_df["All Signals 1 Time [s]"],
-    filtered_df["Time Difference [s]"],
-    color="blue",
-    label="Valid Events"
+    result_df["All Signals 1 Time [s]"],
+    result_df["Time Difference [s]"] * 1e6,
+    color="orange",
+    # label="All Events (Unfiltered)"
 )
+plt.gca().axes.get_xaxis().set_visible(False)
 
-plt.title("Time Difference for All-Signals-1 Events (Filtered)")
-plt.ylabel("Time Difference in us")
+# plt.title("Latenz Messung 1.1", fontsize=18)
+plt.ylabel("µs", fontsize=16)
+plt.ylim(ymin, ymax)  # Setze y-Achsen-Bereich mit 35 µs in der Mitte
 plt.grid(True)
+plt.xticks(fontsize=14)
 plt.legend()
 plt.tight_layout()
 plt.show()
