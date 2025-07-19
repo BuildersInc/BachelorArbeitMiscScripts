@@ -21,8 +21,8 @@ def crc5_parallel(data_bits: list[int], initial_crc: int) -> int:
     return crc
 
 
-def H1(data_width):
-    for x in range(data_width):
+def H1():
+    for x in range(DATA_WIDTH):
         data = 1 << x
         bits = [(data >> i) & 1 for i in reversed(range(8))]
 
@@ -40,7 +40,7 @@ def H2():
 
 if __name__ == "__main__":
     print("="*10)
-    H1(N)
+    H1()
     print("="*10)
     H2()
     print("="*10)
