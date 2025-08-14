@@ -62,6 +62,6 @@ for index, row in data_frame.iterrows():
             time_slave = Decimal(str(row["Time [s]"]))
             delta_ns = int((time_slave - time_master) * Decimal('1e9'))
             times_ns.append(delta_ns)
-for i in range(1+30, 31+30):
+for i in range(1, 31):
     us = times_ns[i] / 1_000  # convert nanoseconds to microseconds
     print(f"{str(f'{us:.2f}').replace('.', ',')}")
